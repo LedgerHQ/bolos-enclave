@@ -1,0 +1,243 @@
+all: build
+
+SECP256K1 := secp256k1
+SODIUM := libsodium-1.0.12/src/libsodium
+UECC := micro-ecc
+CTAES := ctaes
+
+CFLAGS := -Isecp256k1_config/simu -I$(SECP256K1) -I$(SECP256K1)/include -I$(SECP256K1)/src $(CFLAGS)
+CFLAGS += -I$(SODIUM)/include -I$(SODIUM)/include/sodium
+CFLAGS += -I$(CTAES)
+CFLAGS += -Isha3
+CFLAGS += -Iripemd160
+CFLAGS += -I$(UECC)
+CFLAGS += -Imoxie
+
+CFLAGS += -DSODIUM_STATIC
+CFLAGS += -DuECC_SUPPORTS_secp160r1=0 -DuECC_SUPPORTS_secp192r1=0 -DuECC_SUPPORTS_secp224r1=0 -DuECC_SUPPORTS_secp256k1=0 -DuECC_ASM=uECC_asm_none
+CFLAGS += -DCONFIGURED
+CFLAGS += -DUSE_LOW_HEAP
+CFLAGS += -DUSE_KECCAK -DFULL_SHA3_FAMILY_SUPPORT
+
+CFLAGS += -DBOLOS_MAJOR_VERSION=1 -DBOLOS_MINOR_VERSION=0 -DBOLOS_PATCH_VERSION=0
+CFLAGS += -DBOLOS_SHARED_MEMORY_SIZE=2048
+
+CFLAGS += -Iplatform_simu -I.
+CFLAGS += -fstack-protector -fPIC -fvisibility=hidden
+CFLAGS += -DSIMU
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -O0 -g -DDEBUG
+else
+	CFLAGS += -O2
+endif
+
+LFLAGS := -shared -fPIC -Wl,-soname,libbolos.so -lc
+
+OBJDIR := obj-simu
+MKDIR := mkdir -p
+RMDIR := rmdir -p
+RM := rm -rf
+CP := cp
+LN := $(LD)
+ARCH_EXE=$(OBJDIR)/libbolos.so
+ARCH_OBJS=$(OBJS:%=$(OBJDIR)/%.o)
+
+OBJS:=\
+	bolos_portable \
+	bolos_printf \
+	platform_simu/bolos_platform \
+	platform_simu/platform_al \
+	platform_simu/platform_errno \
+	platform_simu/platform_persistent_context \
+	platform_simu/moxie_swi_bolos_crypto \
+	platform_simu/moxie_swi_bolos_antireplay \
+	platform_simu/moxie_swi_bolos_time \
+	$(UECC)/uECC \
+	$(CTAES)/ctaes \
+	ripemd160/ripemd160 \
+	sha3/sha3 \
+	moxie/moxie \
+	moxie/machine \
+	moxie/moxie_swi_sodium \
+	moxie/moxie_swi_common \
+	moxie/moxie_swi_bolos_core \
+	moxie/moxie_swi_bolos_continuation \
+	moxie/moxie_swi_bolos_utils \
+	moxie/moxie_swi_dispatcher \
+	moxie/moxie_swi_bolos_wrapping \
+	moxie/moxie_swi_bolos_shared_memory \
+	moxie/moxie_swi_bolos_endorsement \
+	$(SODIUM)/crypto_aead/chacha20poly1305/sodium/aead_chacha20poly1305 \
+	$(SODIUM)/crypto_auth/crypto_auth \
+	$(SODIUM)/crypto_auth/hmacsha256/auth_hmacsha256 \
+	$(SODIUM)/crypto_auth/hmacsha512/auth_hmacsha512 \
+	$(SODIUM)/crypto_auth/hmacsha512256/auth_hmacsha512256 \
+	$(SODIUM)/crypto_box/crypto_box \
+	$(SODIUM)/crypto_box/crypto_box_easy \
+	$(SODIUM)/crypto_box/crypto_box_seal \
+	$(SODIUM)/crypto_box/curve25519xsalsa20poly1305/box_curve25519xsalsa20poly1305 \
+	$(SODIUM)/crypto_core/curve25519/ref10/curve25519_ref10 \
+	$(SODIUM)/crypto_core/hsalsa20/ref2/core_hsalsa20_ref2 \
+	$(SODIUM)/crypto_core/hsalsa20/core_hsalsa20 \
+	$(SODIUM)/crypto_core/salsa/ref/core_salsa_ref \
+	$(SODIUM)/crypto_generichash/crypto_generichash \
+	$(SODIUM)/crypto_generichash/blake2b/generichash_blake2 \
+	$(SODIUM)/crypto_generichash/blake2b/ref/blake2b-compress-ref \
+	$(SODIUM)/crypto_generichash/blake2b/ref/blake2b-ref \
+	$(SODIUM)/crypto_generichash/blake2b/ref/generichash_blake2b \
+	$(SODIUM)/crypto_hash/crypto_hash \
+	$(SODIUM)/crypto_hash/sha256/hash_sha256 \
+	$(SODIUM)/crypto_hash/sha256/cp/hash_sha256_cp \
+	$(SODIUM)/crypto_hash/sha512/hash_sha512 \
+	$(SODIUM)/crypto_hash/sha512/cp/hash_sha512_cp \
+	$(SODIUM)/crypto_onetimeauth/crypto_onetimeauth \
+	$(SODIUM)/crypto_onetimeauth/poly1305/onetimeauth_poly1305 \
+	$(SODIUM)/crypto_onetimeauth/poly1305/donna/poly1305_donna \
+	$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common \
+	$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/scrypt_platform \
+	$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/pbkdf2-sha256 \
+	$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256 \
+	$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse \
+	$(SODIUM)/crypto_pwhash/crypto_pwhash \
+	$(SODIUM)/crypto_pwhash/argon2/pwhash_argon2i \
+	$(SODIUM)/crypto_pwhash/argon2/argon2 \
+	$(SODIUM)/crypto_pwhash/argon2/argon2-core \
+	$(SODIUM)/crypto_pwhash/argon2/argon2-encoding \
+	$(SODIUM)/crypto_pwhash/argon2/argon2-fill-block-ref \
+	$(SODIUM)/crypto_pwhash/argon2/blake2b-long \
+	$(SODIUM)/crypto_scalarmult/crypto_scalarmult \
+	$(SODIUM)/crypto_scalarmult/curve25519/scalarmult_curve25519 \
+	$(SODIUM)/crypto_secretbox/crypto_secretbox \
+	$(SODIUM)/crypto_secretbox/crypto_secretbox_easy \
+	$(SODIUM)/crypto_secretbox/xsalsa20poly1305/secretbox_xsalsa20poly1305 \
+	$(SODIUM)/crypto_shorthash/crypto_shorthash \
+	$(SODIUM)/crypto_shorthash/siphash24/shorthash_siphash24 \
+	$(SODIUM)/crypto_shorthash/siphash24/ref/shorthash_siphash24_ref \
+	$(SODIUM)/crypto_sign/crypto_sign \
+	$(SODIUM)/crypto_sign/ed25519/sign_ed25519 \
+	$(SODIUM)/crypto_sign/ed25519/ref10/keypair \
+	$(SODIUM)/crypto_sign/ed25519/ref10/open \
+	$(SODIUM)/crypto_sign/ed25519/ref10/sign \
+	$(SODIUM)/crypto_stream/crypto_stream \
+	$(SODIUM)/crypto_stream/chacha20/stream_chacha20 \
+	$(SODIUM)/crypto_stream/chacha20/ref/chacha20_ref \
+	$(SODIUM)/crypto_stream/salsa20/stream_salsa20 \
+	$(SODIUM)/crypto_stream/xsalsa20/stream_xsalsa20 \
+	$(SODIUM)/crypto_verify/sodium/verify \
+	$(SODIUM)/randombytes/randombytes \
+	$(SODIUM)/sodium/core \
+	$(SODIUM)/sodium/runtime \
+	$(SODIUM)/sodium/utils \
+	$(SODIUM)/sodium/version \
+	$(SODIUM)/crypto_scalarmult/curve25519/ref10/x25519_ref10 \
+	$(SODIUM)/crypto_stream/salsa20/ref/salsa20_ref \
+	$(SODIUM)/randombytes/sysrandom/randombytes_sysrandom
+
+$(OBJDIR):
+	$(MKDIR) $(OBJDIR)
+
+$(OBJDIR)/$(SECP256K1):
+	$(MKDIR) $(OBJDIR)/$(SECP256K1)
+
+$(OBJDIR)/$(UECC):
+	$(MKDIR) $(OBJDIR)/$(UECC)
+
+$(OBJDIR)/$(CTAES):
+	$(MKDIR) $(OBJDIR)/$(CTAES)
+
+$(OBJDIR)/ripemd160:
+	$(MKDIR) $(OBJDIR)/ripemd160
+
+$(OBJDIR)/sha3:
+	$(MKDIR) $(OBJDIR)/sha3
+
+$(OBJDIR)/platform_simu:
+	$(MKDIR) $(OBJDIR)/platform_simu
+
+$(OBJDIR)/$(SODIUM):	
+	$(MKDIR) $(OBJDIR)/$(SODIUM) \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/sodium \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_aead/ \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_aead/chacha20poly1305 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_aead/chacha20poly1305/sodium \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_auth \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_auth/hmacsha256 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_auth/hmacsha512 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_auth/hmacsha512256 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_box/crypto_box \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_box/curve25519xsalsa20poly1305 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/ \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/curve25519 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/curve25519/ref10 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/hsalsa20/ \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/hsalsa20/ref2 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/salsa \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_core/salsa/ref \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_generichash/ \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_generichash/crypto_generichash \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_generichash/blake2b \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_generichash/blake2b/ref \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/ \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/crypto_hash \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/sha256 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/sha256/cp \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/sha512 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_hash/sha512/cp \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_onetimeauth \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_onetimeauth/poly1305 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_onetimeauth/poly1305/donna \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_pwhash \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_pwhash/scryptsalsa208sha256 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_pwhash/scryptsalsa208sha256/nosse \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_pwhash/argon2 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_scalarmult \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_scalarmult/curve25519 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_secretbox \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_secretbox/xsalsa20poly1305 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_shorthash \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_shorthash/siphash24 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_shorthash/siphash24/ref \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_sign \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_sign/ed25519 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_sign/ed25519/ref10 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream/chacha20 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream/chacha20/ref \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream/salsa20 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream/salsa20/ref \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_stream/xsalsa20 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/randombytes \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/randombytes/sysrandom \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_verify \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_verify/sodium \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_scalarmult \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_scalarmult/curve25519 \
+	$(MKDIR) $(OBJDIR)/$(SODIUM)/crypto_scalarmult/curve25519/ref10 
+
+$(OBJDIR)/moxie:
+	$(MKDIR) $(OBJDIR)/moxie
+
+
+#
+# Build
+#
+
+.phony: build
+build: $(OBJDIR) $(OBJDIR)/platform_simu $(OBJDIR)/moxie $(OBJDIR)/$(SECP256K1) $(OBJDIR)/$(SODIUM) $(OBJDIR)/$(UECC) $(OBJDIR)/$(CTAES) $(OBJDIR)/ripemd160 $(OBJDIR)/sha3 $(ARCH_EXE)
+
+$(ARCH_EXE): $(ARCH_OBJS)
+	$(CC) $^ -o $@ $(LFLAGS)
+
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.s
+	$(AS) $(AFLAGS) -o $@ $<
+
+clean:
+	-$(RM) $(OBJDIR)
+

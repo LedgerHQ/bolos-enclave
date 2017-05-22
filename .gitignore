@@ -1,0 +1,12 @@
+tee/obj-sgx
+tee/obj-simu
+tee/Enclave/BolosSGX_private.pem
+tee/Enclave/BolosSGX_t.c
+tee/Enclave/BolosSGX_t.h
+tee/secp256k1 
+tee/micro-ecc 
+tee/libsodium-1.0.12 
+tee/ctaes
+moxie/runtime/*.o
+moxie/runtime/*.a
+

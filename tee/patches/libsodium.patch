@@ -1,0 +1,268 @@
+diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c
+--- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-03-06 11:13:57.000000000 +0100
++++ ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-05-19 00:23:19.204617454 +0200
+@@ -27,6 +27,7 @@
+ #include "runtime.h"
+ #include "utils.h"
+ 
++
+ static const char *const itoa64 =
+     "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+ 
+@@ -155,7 +156,7 @@
+     if (need > buflen || need < saltlen) {
+         return NULL;
+     }
+-#ifdef HAVE_EMMINTRIN_H
++#if !defined(SGX) && defined(HAVE_EMMINTRIN_H)
+     escrypt_kdf =
+         sodium_runtime_has_sse2() ? escrypt_kdf_sse : escrypt_kdf_nosse;
+ #else
+@@ -234,7 +235,7 @@
+     if (escrypt_init_local(&local)) {
+         return -1; /* LCOV_EXCL_LINE */
+     }
+-#if defined(HAVE_EMMINTRIN_H)
++#if !defined(SGX) && defined(HAVE_EMMINTRIN_H)
+     escrypt_kdf =
+         sodium_runtime_has_sse2() ? escrypt_kdf_sse : escrypt_kdf_nosse;
+ #else
+diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c
+--- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-03-06 11:13:57.000000000 +0100
++++ ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-05-19 00:25:16.731227818 +0200
+@@ -303,24 +303,34 @@
+ /* Sanity-check parameters. */
+ #if SIZE_MAX > UINT32_MAX
+     if (buflen > (((uint64_t)(1) << 32) - 1) * 32) {
++#if !defined(SGX)
+         errno = EFBIG;
++#endif        
+         return -1;
+     }
+ #endif
+     if ((uint64_t)(r) * (uint64_t)(p) >= ((uint64_t) 1 << 30)) {
++#if !defined(SGX)        
+         errno = EFBIG;
++#endif        
+         return -1;
+     }
+     if (N > UINT32_MAX) {
++#if !defined(SGX)        
+         errno = EFBIG;
++#endif        
+         return -1;
+     }
+     if (((N & (N - 1)) != 0) || (N < 2)) {
++#if !defined(SGX)        
+         errno = EINVAL;
++#endif        
+         return -1;
+     }
+     if (r == 0 || p == 0) {
++#if !defined(SGX)        
+         errno = EINVAL;
++#endif        
+         return -1;
+     }
+     if ((r > SIZE_MAX / 128 / p) ||
+@@ -328,7 +338,9 @@
+         (r > SIZE_MAX / 256) ||
+ #endif
+         (N > SIZE_MAX / 128 / r)) {
++#if !defined(SGX)        
+         errno = ENOMEM;
++#endif    
+         return -1;
+     }
+ 
+@@ -337,13 +349,17 @@
+     V_size = (size_t) 128 * r * N;
+     need   = B_size + V_size;
+     if (need < V_size) {
++#if !defined(SGX)        
+         errno = ENOMEM;
++#endif        
+         return -1;
+     }
+     XY_size = (size_t) 256 * r + 64;
+     need += XY_size;
+     if (need < XY_size) {
++#if !defined(SGX)        
+         errno = ENOMEM;
++#endif        
+         return -1;
+     }
+     if (local->size < need) {
+diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c
+--- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-03-06 11:13:57.000000000 +0100
++++ ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-05-19 00:25:35.119275185 +0200
+@@ -11,6 +11,20 @@
+ #include "randombytes.h"
+ #include "utils.h"
+ 
++#if !defined(SGX)
++
++  void *memchr(const void *s, int c, size_t n) {
++    int i;
++    for (i=0; i<n; i++) {
++        if (((unsigned char*)s)[i] == c) {
++            return (void*)(s + i);
++        }
++    }
++    return NULL;
++  }
++
++#endif
++
+ #define SETTING_SIZE(saltbytes)                                              \
+     ((sizeof "$7$" - 1U) + (1U /* N_log2 */) + (5U /* r */) + (5U /* p */) + \
+      BYTES2CHARS(saltbytes))
+diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c
+--- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-03-06 11:13:57.000000000 +0100
++++ ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-05-19 00:23:19.200617559 +0200
+@@ -31,6 +31,7 @@
+ #define MAP_ANON MAP_ANONYMOUS
+ #endif
+ 
++
+ void *
+ alloc_region(escrypt_region_t *region, size_t size)
+ {
+@@ -81,7 +82,7 @@
+         if (munmap(region->base, region->size)) {
+             return -1; /* LCOV_EXCL_LINE */
+         }
+-#else
++#else                   
+         free(region->base);
+ #endif
+     }
+diff -ur ../libsodium-1.0.12/src/libsodium/include/sodium/export.h ./include/sodium/export.h
+--- ../libsodium-1.0.12/src/libsodium/include/sodium/export.h	2017-03-06 11:13:57.000000000 +0100
++++ ./include/sodium/export.h	2017-05-19 00:21:55.519996882 +0200
+@@ -2,6 +2,10 @@
+ #ifndef sodium_export_H
+ #define sodium_export_H
+ 
++#ifdef SGX
++#define inline
++#endif
++
+ #ifndef __GNUC__
+ # ifdef __attribute__
+ #  undef __attribute__
+diff -ur ../libsodium-1.0.12/src/libsodium/randombytes/salsa20/randombytes_salsa20_random.c ./randombytes/salsa20/randombytes_salsa20_random.c
+--- ../libsodium-1.0.12/src/libsodium/randombytes/salsa20/randombytes_salsa20_random.c	2017-03-12 18:02:25.000000000 +0100
++++ ./randombytes/salsa20/randombytes_salsa20_random.c	2017-05-19 00:23:19.204617454 +0200
+@@ -481,3 +481,4 @@
+     SODIUM_C99(.buf =) randombytes_salsa20_random_buf,
+     SODIUM_C99(.close =) randombytes_salsa20_random_close
+ };
++
+diff -ur ../libsodium-1.0.12/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c ./randombytes/sysrandom/randombytes_sysrandom.c
+--- ../libsodium-1.0.12/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c	2017-03-12 18:02:14.000000000 +0100
++++ ./randombytes/sysrandom/randombytes_sysrandom.c	2017-05-19 00:24:19.155505844 +0200
+@@ -1,7 +1,9 @@
+ 
+ #include <assert.h>
+ #include <errno.h>
++#if !defined(SGX)
+ #include <fcntl.h>
++#endif
+ #include <limits.h>
+ #include <stdint.h>
+ #include <string.h>
+@@ -12,10 +14,11 @@
+ #include <stdlib.h>
+ #include <sys/types.h>
+ #ifndef _WIN32
++#if !defined(SGX)
+ # include <sys/stat.h>
+ # include <sys/time.h>
+ #endif
+-#ifdef __linux__
++#if defined(__linux__) && !defined(SGX)
+ # ifdef __dietlibc__
+ #  define _LINUX_SOURCE
+ # else
+@@ -23,12 +26,17 @@
+ # endif
+ # include <poll.h>
+ #endif
++#endif
++
++#ifdef SGX
++#include "sgx_trts.h"
++#endif
+ 
+ #include "randombytes.h"
+ #include "randombytes_sysrandom.h"
+ #include "utils.h"
+ 
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(SGX)
+ /* `RtlGenRandom` is used over `CryptGenRandom` on Microsoft Windows based systems:
+  *  - `CryptGenRandom` requires pulling in `CryptoAPI` which causes unnecessary
+  *     memory overhead if this API is not being used for other purposes
+@@ -52,7 +60,42 @@
+ # define SSIZE_MAX (SIZE_MAX / 2 - 1)
+ #endif
+ 
+-#ifdef HAVE_SAFE_ARC4RANDOM
++
++#if   defined SGX
++
++static uint32_t
++randombytes_sysrandom(void)
++{
++    uint8_t buffer[1];
++    sgx_status_t status;
++
++    status = sgx_read_rand(buffer, 1);
++    assert(status == SGX_SUCCESS);
++
++    return buffer[0];
++}
++
++static void
++randombytes_sysrandom_stir(void)
++{
++}
++
++static void
++randombytes_sysrandom_buf(void * const buf, const size_t size)
++{
++    sgx_status_t status;
++
++    status = sgx_read_rand((uint8_t*)buf, size);
++    assert(status == SGX_SUCCESS);
++}
++
++static int
++randombytes_sysrandom_close(void)
++{
++    return 0;
++}
++
++#elif defined HAVE_SAFE_ARC4RANDOM
+ 
+ static uint32_t
+ randombytes_sysrandom(void)
+diff -ur ../libsodium-1.0.12/src/libsodium/sodium/core.c ./sodium/core.c
+--- ../libsodium-1.0.12/src/libsodium/sodium/core.c	2017-03-09 15:55:47.000000000 +0100
++++ ./sodium/core.c	2017-05-19 00:23:19.232616709 +0200
+@@ -19,14 +19,6 @@
+ #include "utils.h"
+ #include "private/mutex.h"
+ 
+-#if !defined(_MSC_VER) && 0
+-# warning *** This is unstable, untested, development code.
+-# warning It might not compile. It might not work as expected.
+-# warning It might be totally insecure.
+-# warning Do not use this in production.
+-# warning Use releases available at https://download.libsodium.org/libsodium/releases/ instead.
+-# warning Alternatively, use the "stable" branch in the git repository.
+-#endif
+ 
+ #if !defined(_MSC_VER) && (!defined(CONFIGURED) || CONFIGURED != 1)
+ # warning *** The library is being compiled using an undocumented method.

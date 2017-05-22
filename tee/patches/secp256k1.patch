@@ -1,0 +1,52 @@
+diff -ur /tmp/secp256k1/src/ecmult_impl.h ./ecmult_impl.h
+--- /tmp/secp256k1/src/ecmult_impl.h	2017-05-19 07:42:47.490335205 +0200
++++ ./ecmult_impl.h	2017-05-08 12:51:18.164538841 +0200
+@@ -29,15 +29,27 @@
+ #  endif
+ #else
+ /* optimal for 128-bit and 256-bit exponents. */
++#ifndef USE_LOW_HEAP
+ #define WINDOW_A 5
++#else
++#define WINDOW_A 2
++#endif
+ /** larger numbers may result in slightly better performance, at the cost of
+     exponentially larger precomputed tables. */
+ #ifdef USE_ENDOMORPHISM
+ /** Two tables for window size 15: 1.375 MiB. */
++#ifndef USE_LOW_HEAP
+ #define WINDOW_G 15
+ #else
++#define WINDOW_G 2
++#endif
++#else
+ /** One table for window size 16: 1.375 MiB. */
++#ifndef USE_LOW_HEAP
+ #define WINDOW_G 16
++#else
++#define WINDOW_G 2
++#endif
+ #endif
+ #endif
+ 
+diff -ur /tmp/secp256k1/src/secp256k1.c ./secp256k1.c
+--- /tmp/secp256k1/src/secp256k1.c	2017-05-19 07:43:08.427182744 +0200
++++ ./secp256k1.c	2017-03-29 11:52:16.455827366 +0200
+@@ -27,7 +27,7 @@
+ 
+ static void default_illegal_callback_fn(const char* str, void* data) {
+     (void)data;
+-    fprintf(stderr, "[libsecp256k1] illegal argument: %s\n", str);
++    /*fprintf(stderr, "[libsecp256k1] illegal argument: %s\n", str);*/
+     abort();
+ }
+ 
+@@ -38,7 +38,7 @@
+ 
+ static void default_error_callback_fn(const char* str, void* data) {
+     (void)data;
+-    fprintf(stderr, "[libsecp256k1] internal consistency check failed: %s\n", str);
++    /*fprintf(stderr, "[libsecp256k1] internal consistency check failed: %s\n", str);*/
+     abort();
+ }
+ 

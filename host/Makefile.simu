@@ -1,0 +1,52 @@
+all: build
+
+# Name of the application
+NAME:=testTee
+
+CFLAGS+=-I../tee -Iplatform_simu -I. 
+
+OBJDIR := obj-simu
+MKDIR := mkdir -p
+RMDIR := rmdir -p
+RM := rm -rf
+CP := cp
+LN := $(LD)
+ARCH_EXE=$(OBJDIR)/$(NAME)
+ARCH_OBJS=$(OBJS:%=$(OBJDIR)/%.o)
+
+build: $(OBJDIR) $(OBJDIR)/platform_simu $(ARCH_EXE) $(INSTALL_EXE)
+
+OBJS:=\
+	testTee \
+	hexUtils \
+	platform_simu/client_al
+
+$(OBJDIR):
+	$(MKDIR) $(OBJDIR)	
+
+$(OBJDIR)/platform_simu:
+	$(MKDIR) $(OBJDIR)/platform_simu
+
+$(OBJDIR)/Enclave:
+	$(MKDIR) $(OBJDIR)/Enclave
+
+# build the test program
+$(ARCH_EXE): $(ARCH_OBJS)
+	$(CC) $^ -o $@  -L../tee/obj-simu -lbolos -lelf
+
+# install the test program to another location (if specified)
+$(INSTALL_EXE): $(ARCH_EXE)
+	$(CP) $^ $@
+
+	
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.s
+	$(AS) $(AFLAGS) -o $@ $<
+
+clean:
+	-$(RM) $(OBJDIR)
