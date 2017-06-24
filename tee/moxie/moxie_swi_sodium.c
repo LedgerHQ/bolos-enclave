@@ -498,13 +498,13 @@ void moxie_crypto_sign(struct machine *mach) {
     }
 
     status = crypto_sign(sm, &smlen_param, m, mlen, sk);
-    if (!write32_check(mach, mach->cpu.regs[MOXIE_R1], smlen_param)) {
+    if (!write32_check(mach, mach->cpu.regs[MOXIE_R1], (uint32_t)smlen_param)) {
         DEBUG("Invalid length pointer (write)\n");
         status = 0;
         goto end;
     }
     {
-        uint32_t test = smlen_param;
+        uint32_t test = (uint32_t)smlen_param;
         DEBUG("Sign writing size %d %d\n", test, crypto_sign_BYTES);
     }
 
@@ -550,7 +550,7 @@ void moxie_crypto_sign_open(struct machine *mach) {
     }
 
     status = crypto_sign_open(m, &mlen_param, sm, smlen, pk);
-    if (!write32_check(mach, mach->cpu.regs[MOXIE_R1], mlen_param)) {
+    if (!write32_check(mach, mach->cpu.regs[MOXIE_R1], (uint32_t)mlen_param)) {
         DEBUG("Invalid length pointer (write)\n");
         status = 0;
         goto end;

@@ -1,6 +1,6 @@
-diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c
---- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-03-06 11:13:57.000000000 +0100
-+++ ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-05-19 00:23:19.204617454 +0200
+diff -ur ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c
+--- ./crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/crypto_scrypt-common.c	2017-05-19 00:23:19.204617454 +0200
 @@ -27,6 +27,7 @@
  #include "runtime.h"
  #include "utils.h"
@@ -27,9 +27,9 @@ diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/cr
      escrypt_kdf =
          sodium_runtime_has_sse2() ? escrypt_kdf_sse : escrypt_kdf_nosse;
  #else
-diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c
---- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-03-06 11:13:57.000000000 +0100
-+++ ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-05-19 00:25:16.731227818 +0200
+diff -ur ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c
+--- ./crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/nosse/pwhash_scryptsalsa208sha256_nosse.c	2017-05-19 00:25:16.731227818 +0200
 @@ -303,24 +303,34 @@
  /* Sanity-check parameters. */
  #if SIZE_MAX > UINT32_MAX
@@ -93,9 +93,9 @@ diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/no
          return -1;
      }
      if (local->size < need) {
-diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c
---- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-03-06 11:13:57.000000000 +0100
-+++ ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-05-19 00:25:35.119275185 +0200
+diff -ur ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c
+--- ./crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/pwhash_scryptsalsa208sha256.c	2017-05-19 00:25:35.119275185 +0200
 @@ -11,6 +11,20 @@
  #include "randombytes.h"
  #include "utils.h"
@@ -117,9 +117,9 @@ diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/pw
  #define SETTING_SIZE(saltbytes)                                              \
      ((sizeof "$7$" - 1U) + (1U /* N_log2 */) + (5U /* r */) + (5U /* p */) + \
       BYTES2CHARS(saltbytes))
-diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c
---- ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-03-06 11:13:57.000000000 +0100
-+++ ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-05-19 00:23:19.200617559 +0200
+diff -ur ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c
+--- ./crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/crypto_pwhash/scryptsalsa208sha256/scrypt_platform.c	2017-05-19 00:23:19.200617559 +0200
 @@ -31,6 +31,7 @@
  #define MAP_ANON MAP_ANONYMOUS
  #endif
@@ -137,9 +137,9 @@ diff -ur ../libsodium-1.0.12/src/libsodium/crypto_pwhash/scryptsalsa208sha256/sc
          free(region->base);
  #endif
      }
-diff -ur ../libsodium-1.0.12/src/libsodium/include/sodium/export.h ./include/sodium/export.h
---- ../libsodium-1.0.12/src/libsodium/include/sodium/export.h	2017-03-06 11:13:57.000000000 +0100
-+++ ./include/sodium/export.h	2017-05-19 00:21:55.519996882 +0200
+diff -ur ./include/sodium/export.h /tmp/libsodium-1.0.12-modif/include/sodium/export.h
+--- ./include/sodium/export.h	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/include/sodium/export.h	2017-05-19 00:21:55.519996882 +0200
 @@ -2,6 +2,10 @@
  #ifndef sodium_export_H
  #define sodium_export_H
@@ -151,17 +151,30 @@ diff -ur ../libsodium-1.0.12/src/libsodium/include/sodium/export.h ./include/sod
  #ifndef __GNUC__
  # ifdef __attribute__
  #  undef __attribute__
-diff -ur ../libsodium-1.0.12/src/libsodium/randombytes/salsa20/randombytes_salsa20_random.c ./randombytes/salsa20/randombytes_salsa20_random.c
---- ../libsodium-1.0.12/src/libsodium/randombytes/salsa20/randombytes_salsa20_random.c	2017-03-12 18:02:25.000000000 +0100
-+++ ./randombytes/salsa20/randombytes_salsa20_random.c	2017-05-19 00:23:19.204617454 +0200
+diff -ur ./include/sodium/private/common.h /tmp/libsodium-1.0.12-modif/include/sodium/private/common.h
+--- ./include/sodium/private/common.h	2017-03-06 23:32:40.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/include/sodium/private/common.h	2017-06-12 14:58:23.110353953 +0200
+@@ -193,7 +193,8 @@
+ #endif
+ 
+ #if defined(_MSC_VER) && \
+-    (defined(_M_X64) || defined(_M_AMD64) || defined(_M_IX86))
++    (defined(_M_X64) || defined(_M_AMD64) || defined(_M_IX86)) && \
++    !defined(SGX)
+ 
+ # include <intrin.h>
+ 
+diff -ur ./randombytes/salsa20/randombytes_salsa20_random.c /tmp/libsodium-1.0.12-modif/randombytes/salsa20/randombytes_salsa20_random.c
+--- ./randombytes/salsa20/randombytes_salsa20_random.c	2017-03-12 18:02:25.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/randombytes/salsa20/randombytes_salsa20_random.c	2017-05-19 00:23:19.204617454 +0200
 @@ -481,3 +481,4 @@
      SODIUM_C99(.buf =) randombytes_salsa20_random_buf,
      SODIUM_C99(.close =) randombytes_salsa20_random_close
  };
 +
-diff -ur ../libsodium-1.0.12/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c ./randombytes/sysrandom/randombytes_sysrandom.c
---- ../libsodium-1.0.12/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c	2017-03-12 18:02:14.000000000 +0100
-+++ ./randombytes/sysrandom/randombytes_sysrandom.c	2017-05-19 00:24:19.155505844 +0200
+diff -ur ./randombytes/sysrandom/randombytes_sysrandom.c /tmp/libsodium-1.0.12-modif/randombytes/sysrandom/randombytes_sysrandom.c
+--- ./randombytes/sysrandom/randombytes_sysrandom.c	2017-03-12 18:02:14.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/randombytes/sysrandom/randombytes_sysrandom.c	2017-05-19 00:24:19.155505844 +0200
 @@ -1,7 +1,9 @@
  
  #include <assert.h>
@@ -248,9 +261,18 @@ diff -ur ../libsodium-1.0.12/src/libsodium/randombytes/sysrandom/randombytes_sys
  
  static uint32_t
  randombytes_sysrandom(void)
-diff -ur ../libsodium-1.0.12/src/libsodium/sodium/core.c ./sodium/core.c
---- ../libsodium-1.0.12/src/libsodium/sodium/core.c	2017-03-09 15:55:47.000000000 +0100
-+++ ./sodium/core.c	2017-05-19 00:23:19.232616709 +0200
+diff -ur ./sodium/core.c /tmp/libsodium-1.0.12-modif/sodium/core.c
+--- ./sodium/core.c	2017-03-09 15:55:47.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/sodium/core.c	2017-06-12 15:00:29.412668516 +0200
+@@ -1,7 +1,7 @@
+ 
+ #include <string.h>
+ #include <time.h>
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(SGX)
+ # include <windows.h>
+ #elif defined(HAVE_PTHREAD)
+ # include <pthread.h>
 @@ -19,14 +19,6 @@
  #include "utils.h"
  #include "private/mutex.h"
@@ -266,3 +288,43 @@ diff -ur ../libsodium-1.0.12/src/libsodium/sodium/core.c ./sodium/core.c
  
  #if !defined(_MSC_VER) && (!defined(CONFIGURED) || CONFIGURED != 1)
  # warning *** The library is being compiled using an undocumented method.
+@@ -64,7 +56,7 @@
+     return 0;
+ }
+ 
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(SGX)
+ 
+ static CRITICAL_SECTION _sodium_lock;
+ static volatile LONG    _sodium_lock_initialized;
+diff -ur ./sodium/utils.c /tmp/libsodium-1.0.12-modif/sodium/utils.c
+--- ./sodium/utils.c	2017-03-06 11:13:57.000000000 +0100
++++ /tmp/libsodium-1.0.12-modif/sodium/utils.c	2017-06-12 15:08:18.405077857 +0200
+@@ -14,7 +14,7 @@
+ # include <sys/mman.h>
+ #endif
+ 
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(SGX)
+ # include <windows.h>
+ # include <wincrypt.h>
+ #else
+@@ -29,7 +29,8 @@
+ #endif
+ 
+ #if defined(_WIN32) && \
+-    (!defined(WINAPI_FAMILY) || WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
++    (!defined(WINAPI_FAMILY) || WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP) && \
++    !defined(SGX)
+ # define WINAPI_DESKTOP
+ #endif
+ 
+@@ -79,7 +80,7 @@
+ void
+ sodium_memzero(void *const pnt, const size_t len)
+ {
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(SGX)
+     SecureZeroMemory(pnt, len);
+ #elif defined(HAVE_MEMSET_S)
+     if (len > 0U && memset_s(pnt, (rsize_t) len, 0, (rsize_t) len) != 0) {

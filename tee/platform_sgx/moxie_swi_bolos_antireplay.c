@@ -173,7 +173,6 @@ void moxie_bls_antireplay_delete(struct machine *mach) {
     uint8_t *reference;
     uint32_t referenceLength = mach->cpu.regs[MOXIE_R1];
     sgx_mc_uuid_t counterReference;
-    uint32_t counterValue;
     int ret;
     if (referenceLength != sizeof(sgx_mc_uuid_t)) {
         printf("Invalid reference\n");

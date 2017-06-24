@@ -41,6 +41,10 @@ else
         SGX_COMMON_CFLAGS += -O2
 endif
 
+ifeq ($(SIMU), 1)
+	SGX_COMMON_CFLAGS += -DSIMU
+endif
+
 ######## Enclave Settings ########
 
 ifneq ($(SGX_MODE), HW)
@@ -283,7 +287,7 @@ $(OBJDIR)/moxie:
 #
 
 .phony: build
-build: $(OBJDIR) $(OBJDIR)/platform_sgx $(OBJDIR)/moxie $(OBJDIR)/$(SECP256K1) $(OBJDIR)/$(SODIUM) $(OBJDIR)/$(UECC) $(OBJDIR)/$(CTAES) $(OBJDIR)/sha3 $(OBJDIR)/ripemd160 $(OBJDIR)/Enclave $(ARCH_EXE_SIGNED)
+build: $(OBJDIR) $(OBJDIR)/platform_sgx $(OBJDIR)/moxie $(OBJDIR)/$(SECP256K1) $(OBJDIR)/$(SODIUM) $(OBJDIR)/$(UECC) $(OBJDIR)/$(CTAES) $(OBJDIR)/sha3 $(OBJDIR)/ripemd160 $(OBJDIR)/Enclave $(ARCH_EXE)
 
 Enclave/BolosSGX_t.c: Enclave/BolosSGX.edl
 	cd Enclave && $(SGX_EDGER8R) --trusted BolosSGX.edl --search-path $(SGX_SDK)/include

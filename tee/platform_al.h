@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 void platform_secure_memset0(void *buffer, uint32_t length);
 bool platform_random(uint8_t *buffer, uint32_t length);
@@ -33,5 +34,6 @@ uint32_t platform_get_id(uint8_t *buffer, uint32_t length);
 bool platform_verify_id(uint8_t *buffer, uint32_t length);
 uint32_t platform_get_version_string(uint8_t *buffer, uint32_t length);
 void platform_printc(char ch);
+void platform_assert(int expression);
 
 #endif

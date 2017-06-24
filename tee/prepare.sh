@@ -6,7 +6,7 @@ cd src
 patch -p0 < ../../patches/secp256k1.patch
 cd ..
 ./autogen.sh
-./configure --enable-endomorphism --enable-module-ecdh --enable-module-recovery --enable-experimental --enable-openssl-tests=no
+./configure --enable-endomorphism --enable-module-ecdh --enable-module-recovery --enable-experimental --enable-openssl-tests=no --with-bignum=no
 make src/ecmult_static_context.h
 cd ..
 git clone https://github.com/kmackay/micro-ecc 

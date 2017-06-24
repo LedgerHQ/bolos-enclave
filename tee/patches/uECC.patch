@@ -1,6 +1,14 @@
-diff -ur /tmp/micro-ecc/platform-specific.inc ./platform-specific.inc
 --- /tmp/micro-ecc/platform-specific.inc	2017-05-19 08:18:52.076322497 +0200
-+++ ./platform-specific.inc	2017-05-09 01:01:02.314037200 +0200
++++ platform-specific.inc	2017-06-12 10:30:27.176905338 +0200
+@@ -5,7 +5,7 @@
+ 
+ #include "types.h"
+ 
+-#if (defined(_WIN32) || defined(_WIN64))
++#if (defined(_WIN32) || defined(_WIN64)) && !defined(SGX)
+ /* Windows */
+ 
+ #define WIN32_LEAN_AND_MEAN
 @@ -24,8 +24,8 @@
  }
  #define default_RNG_defined 1

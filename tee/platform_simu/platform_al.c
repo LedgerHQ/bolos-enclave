@@ -28,6 +28,12 @@ static uint8_t IDENTITY_SIMU[] = "SIMU";
 
 crypto_hash_sha256_state sha256;
 
+void platform_assert(int expression) {
+    if (!expression) {
+        abort();
+    }
+}
+
 bool platform_random(uint8_t *buffer, uint32_t length) {
     uint32_t i;
     for (i = 0; i < length; i++) {
@@ -92,4 +98,8 @@ uint32_t platform_get_version_string(uint8_t *buffer, uint32_t length) {
 
 void platform_printc(char ch) {
     printf("%c", ch);
+}
+
+void platform_secure_memset0(void *buffer, uint32_t length) {
+    memset(buffer, 0, length);
 }

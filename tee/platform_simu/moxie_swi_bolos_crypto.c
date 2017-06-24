@@ -39,6 +39,7 @@
 #define MAX_RSA_LONGINT_SIZE 512
 #define MAX_SYMMETRIC_KEY_SIZE 32
 
+
 extern secp256k1_context *secp256k1Context;
 
 // uECC deterministic signing
@@ -104,6 +105,7 @@ cx_ecfp_private_key_t ecfp_private_keys[MAX_ECFP_PRIVATE_KEYS];
 bool ecfp_private_key_available[MAX_ECFP_PRIVATE_KEYS];
 symmetricKey_t symmetricKeys[MAX_SYMMETRIC_KEYS];
 bool symmetric_key_available[MAX_SYMMETRIC_KEYS];
+
 
 cryptoSession_t cryptoSessions[MAX_CRYPTO_SESSIONS];
 hashSession_t hashSessions[MAX_HASH_SESSIONS];
@@ -348,6 +350,7 @@ uint8_t check_hmac_handle_use(uint32_t hmacHandle) {
     }
     return 1;
 }
+
 
 /*
 * bls_rng_u8
@@ -1036,10 +1039,12 @@ end:
 */
 void moxie_bls_des_init_key(struct machine *mach) {
     mach->cpu.exception = SIGBUS;
+
 }
 
 void moxie_bls_des_iv_mixed(struct machine *mach, bool useIV) {
     mach->cpu.exception = SIGBUS;
+
 }
 
 /*
@@ -1574,6 +1579,7 @@ void moxie_bls_ecfp_generate_pair(struct machine *mach) {
             }
             memmove(ecfp_private_keys[cryptoHandle_private - 1].d, tmp, 32);
             ecfp_private_keys[cryptoHandle_private - 1].d_len = 32;
+            ecfp_private_keys[cryptoHandle_private - 1].curve = curve;
         } else {
             memmove(tmp, ecfp_private_keys[cryptoHandle_private - 1].d, 32);
         }
@@ -1585,6 +1591,8 @@ void moxie_bls_ecfp_generate_pair(struct machine *mach) {
         secp256k1_ec_pubkey_serialize(
             secp256k1Context, ecfp_public_keys[cryptoHandle_public - 1].W,
             &length, &pubkey, SECP256K1_EC_UNCOMPRESSED);
+        ecfp_public_keys[cryptoHandle_public - 1].curve = curve;
+        ecfp_public_keys[cryptoHandle_public - 1].W_len = length;
     } else {
         if (!reuse ||
             (ecfp_private_keys[cryptoHandle_private - 1].d_len == 0)) {
@@ -1596,6 +1604,10 @@ void moxie_bls_ecfp_generate_pair(struct machine *mach) {
                 goto end;
             }
             ecfp_public_keys[cryptoHandle_public - 1].W[0] = 0x04;
+            ecfp_public_keys[cryptoHandle_public - 1].curve = curve;
+            ecfp_public_keys[cryptoHandle_public - 1].W_len = 65;
+            ecfp_private_keys[cryptoHandle_private - 1].d_len = 32;
+            ecfp_private_keys[cryptoHandle_private - 1].curve = curve;
         } else {
             if (!uECC_compute_public_key(
                     ecfp_private_keys[cryptoHandle_private - 1].d,
@@ -1605,6 +1617,8 @@ void moxie_bls_ecfp_generate_pair(struct machine *mach) {
                 goto end;
             }
             ecfp_public_keys[cryptoHandle_public - 1].W[0] = 0x04;
+            ecfp_public_keys[cryptoHandle_public - 1].curve = curve;
+            ecfp_public_keys[cryptoHandle_public - 1].W_len = 65;
         }
     }
     if (privateComponent != NULL) {
@@ -2053,6 +2067,7 @@ void moxie_bls_ecdh(struct machine *mach) {
                 printf("ECDH error\n");
                 goto end;
             }
+            status = 32;
         }
     } else {
         printf("Unsupported mode\n");

@@ -47,7 +47,7 @@ uint32_t codeCurrentOffset;
 struct addressRange memoryMapping[MAX_MEMMAP_ENTRIES];
 struct machine mach;
 
-#ifdef SIMU
+#if defined(SIMU)
 
 // b1ed47ef58f782e2bc4d5abe70ef66d9009c2957967017054470e0f3e10f5833
 
@@ -65,15 +65,16 @@ static const uint8_t LEDGER_CODE_PUBLIC_KEY[] = {
 #else
 
 static const uint8_t LEDGER_CODE_PUBLIC_KEY[] = {
+
     0x04,
 
-    0x98, 0x4f, 0xac, 0x02, 0x27, 0x0f, 0x00, 0xd6, 0x93, 0xc0, 0x30,
-    0x70, 0xfb, 0x3d, 0xdb, 0xcf, 0x02, 0x9a, 0xd6, 0x7f, 0xe4, 0x84,
-    0x3e, 0x6d, 0xe0, 0x7c, 0xd7, 0xc7, 0x6b, 0xa1, 0x11, 0x61,
+    0xcc, 0xe1, 0x54, 0x19, 0xad, 0x94, 0xb2, 0xda, 0x64, 0x78, 0x24,
+    0x49, 0x59, 0xa7, 0x1e, 0x7a, 0x8a, 0x0c, 0xe1, 0x2a, 0xf9, 0x8a,
+    0x07, 0x65, 0x88, 0x30, 0xed, 0xf1, 0xbd, 0x4d, 0x1e, 0x2e,
 
-    0xde, 0x34, 0xad, 0x62, 0x37, 0x43, 0xe8, 0x76, 0x9e, 0xe5, 0xfa,
-    0xc7, 0x75, 0xeb, 0xbc, 0xf7, 0x3d, 0xe9, 0x54, 0xd9, 0x1b, 0x34,
-    0xd0, 0x1e, 0x6f, 0xcd, 0x14, 0xec, 0x50, 0x11, 0xcc, 0xd5};
+    0x89, 0xda, 0xcb, 0x48, 0xb0, 0x4c, 0xad, 0xb8, 0x19, 0x07, 0x88,
+    0xae, 0x0b, 0x1f, 0xe3, 0xad, 0x4c, 0x5f, 0xe8, 0xc9, 0xd6, 0x26,
+    0x6f, 0x6e, 0x48, 0xcd, 0x63, 0x5f, 0xdc, 0xe7, 0x6a, 0x8c};
 
 #endif
 
@@ -111,13 +112,13 @@ void write_u32_be(unsigned char *buffer, uint32_t value) {
 }
 
 void write_u64_be(unsigned char *buffer, uint64_t value) {
-    buffer[0] = (value >> 56);
-    buffer[1] = (value >> 48);
-    buffer[2] = (value >> 40);
-    buffer[3] = (value >> 32);
-    buffer[4] = (value >> 24);
-    buffer[5] = (value >> 16);
-    buffer[6] = (value >> 8);
+    buffer[0] = (uint8_t)(value >> 56);
+    buffer[1] = (uint8_t)(value >> 48);
+    buffer[2] = (uint8_t)(value >> 40);
+    buffer[3] = (uint8_t)(value >> 32);
+    buffer[4] = (uint8_t)(value >> 24);
+    buffer[5] = (uint8_t)(value >> 16);
+    buffer[6] = (uint8_t)(value >> 8);
     buffer[7] = (value & 0xff);
 }
 
@@ -149,8 +150,9 @@ int get_free_execution_slot() {
     for (i = 0; i < bolosTransientContext.numExecSlots; i++) {
         if (!bolosTransientContext.execSlots[i].busy) {
             bolosTransientContext.execSlots[i].busy = true;
-            assert(platform_random(bolosTransientContext.execSlots[i].slotKey,
-                                   crypto_secretbox_KEYBYTES));
+            platform_assert(
+                platform_random(bolosTransientContext.execSlots[i].slotKey,
+                                crypto_secretbox_KEYBYTES));
             return i;
         }
     }
@@ -247,6 +249,8 @@ int restore_machine_state(uint32_t slotIndex, uint8_t *in, uint32_t length) {
     uint32_t i;
     uint32_t stackSize;
     uint8_t hash[32];
+    uint32_t hashLength;
+    uint8_t error = 0;
     struct addressRange *current;
     bool hasStack = false;
     if (length < (crypto_secretbox_NONCEBYTES + crypto_secretbox_MACBYTES)) {
@@ -343,8 +347,13 @@ int restore_machine_state(uint32_t slotIndex, uint8_t *in, uint32_t length) {
         printf("Get machine hash failed\n");
         return 0;
     }
-    if (memcmp(hash, bolosTransientContext.execSlots[slotIndex].stateHash,
-               32) != 0) {
+    hashLength = 32;
+    while (hashLength--) {
+        error |=
+            hash[hashLength] ^
+            bolosTransientContext.execSlots[slotIndex].stateHash[hashLength];
+    }
+    if (error) {
         printf("Machine hash differ\n");
         return 0;
     }
@@ -352,7 +361,7 @@ int restore_machine_state(uint32_t slotIndex, uint8_t *in, uint32_t length) {
 }
 
 int uecc_rng(uint8_t *p_dest, unsigned p_size) {
-    assert(platform_random(p_dest, p_size));
+    platform_assert(platform_random(p_dest, p_size));
     return 1;
 }
 
@@ -402,7 +411,7 @@ bolos_exec_status_t bolos_handle_message(void *platformContext, uint8_t *buffer,
             status = BOLOS_EXEC_INVALID_ARGUMENTS;
             break;
         }
-        assert(platform_random(out, randomLength));
+        platform_assert(platform_random(out, randomLength));
         *outLength = randomLength;
         status = BOLOS_EXEC_OK;
     } break;
@@ -416,7 +425,7 @@ bolos_exec_status_t bolos_handle_message(void *platformContext, uint8_t *buffer,
         platform_secure_memset0(&bolosTransientContext,
                                 sizeof(bolosTransientContext));
         moxie_swi_shared_memory_init();
-        assert(
+        platform_assert(
             platform_random(bolosTransientContext.sessionWrappingKey,
                             sizeof(bolosTransientContext.sessionWrappingKey)));
         if ((reqLength - offset) >= 8) {
@@ -710,6 +719,9 @@ bolos_exec_status_t bolos_handle_message(void *platformContext, uint8_t *buffer,
         moxie_swi_crypto_init();
         sim_resume(&mach, 0);
         moxie_swi_crypto_cleanup();
+        platform_secure_memset0(codeData, codeLength);
+        free(codeData);
+        codeData = NULL;
         if ((mach.cpu.exception != SIGQUIT) &&
             (mach.cpu.exception != SIGSUSPEND)) {
             printf("Execution error %d\n", mach.cpu.exception);

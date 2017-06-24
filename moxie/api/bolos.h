@@ -79,6 +79,7 @@ CPU - for more details about setting
 */
 
 #include <stddef.h>
+#include <stdint.h>
 #include <stdbool.h>
 
 #define WIDE const

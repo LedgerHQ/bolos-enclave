@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Prerelease|Win32">
+      <Configuration>Prerelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Simulation|Win32">
+      <Configuration>Simulation</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A888DBA5-5386-4CCD-AB55-159FB62EACA9}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'" Label="PropertySheets">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'" Label="PropertySheets">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'" Label="PropertySheets">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">
+    <Import Project="$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props" Condition="exists('$(LocalAppData)\Microsoft\VisualStudio\11.0\SecureEnclave.$(Platform).props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(NoInherit)</IncludePath>
+    <LibraryPath>$(NoInherit)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(NoInherit)</IncludePath>
+    <LibraryPath>$(NoInherit)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(NoInherit)</IncludePath>
+    <LibraryPath>$(NoInherit)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(NoInherit)</IncludePath>
+    <LibraryPath>$(NoInherit)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>.;$(SGXSDKInstallPath)include;$(SGXSDKInstallPath)include\tlibc;$(SGXSDKInstallPath)include\stlport;%(AdditionalIncludeDirectories);..\..;..\..\secp256k1;..\..\secp256k1\include;..\..\secp256k1\src;..\..\libsodium-1.0.12\src\libsodium\include;..\..\libsodium-1.0.12\src\libsodium\include\sodium;..\..\micro-ecc;..\..\moxie;..\..\ctaes;..\..\platform_sgx..\..\ripemd160;..\..\sha3</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;%(PreprocessorDefinitions);USE_LOW_HEAP=1;uECC_SUPPORTS_secp160r1=0;uECC_SUPPORTS_secp192r1=0;-ECC_SUPPORTS_secp224r1=0;uECC_SUPPORTS_secp256k1=0;uECC_ASM=uECC_asm_none;CONFIGURED;USE_KECCAK;FULL_SHA3_FAMILY_SUPPORT;BOLOS_MAJOR_VERSION=1;BOLOS_MINOR_VERSION=0;BOLOS_PATCH_VERSION=0;BOLOS_SHARED_MEMORY_SIZE=2048;SODIUM_STATIC;SGX;SGX_DEBUG=1;SIMU</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sgx_trts.lib;sgx_tstdc.lib;sgx_tservice.lib;sgx_tcrypto.lib;sgx_tkey_exchange.lib;sgx_tstdcxx.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <EntryPointSymbol />
+      <NoEntryPoint>true</NoEntryPoint>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(SGXSDKInstallPath)bin\win32\release\sgx_sign.exe" sign -key "$(ProjectDir)BolosSGX_private.pem" -enclave "$(OutDir)BolosSGX.dll" -out "$(OutDir)BolosSGX.signed.dll" -config "$(ProjectDir)..\..\Enclave\BolosSGX.config.xml"</Command>
+      <Message>sign the enclave</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>.;$(SGXSDKInstallPath)include;$(SGXSDKInstallPath)include\tlibc;$(SGXSDKInstallPath)include\stlport;%(AdditionalIncludeDirectories);..\..;..\..\secp256k1;..\..\secp256k1\include;..\..\secp256k1\src;..\..\libsodium-1.0.12\src\libsodium\include;..\..\libsodium-1.0.12\src\libsodium\include\sodium;..\..\micro-ecc;..\..\moxie;..\..\ctaes;..\..\platform_sgx..\..\ripemd160;..\..\sha3</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;%(PreprocessorDefinitions);USE_LOW_HEAP=1;uECC_SUPPORTS_secp160r1=0;uECC_SUPPORTS_secp192r1=0;-ECC_SUPPORTS_secp224r1=0;uECC_SUPPORTS_secp256k1=0;uECC_ASM=uECC_asm_none;CONFIGURED;USE_KECCAK;FULL_SHA3_FAMILY_SUPPORT;BOLOS_MAJOR_VERSION=1;BOLOS_MINOR_VERSION=0;BOLOS_PATCH_VERSION=0;BOLOS_SHARED_MEMORY_SIZE=2048;SODIUM_STATIC;SGX;SGX_DEBUG=1;SIMU</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sgx_trts_sim.lib;sgx_tstdc.lib;sgx_tservice_sim.lib;sgx_tcrypto.lib;sgx_tstdcxx.lib;sgx_tkey_exchange.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)bin\$(Platform)\Debug</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <NoEntryPoint>true</NoEntryPoint>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(SGXSDKInstallPath)bin\win32\release\sgx_sign.exe" sign -key "$(ProjectDir)BolosSGX_private.pem" -enclave "$(OutDir)BolosSGX.dll" -out "$(OutDir)BolosSGX.signed.dll" -config "$(ProjectDir)..\..\Enclave\BolosSGX.config.xml"</Command>
+      <Message>sign the enclave</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>.;$(SGXSDKInstallPath)include;$(SGXSDKInstallPath)include\tlibc;$(SGXSDKInstallPath)include\stlport;%(AdditionalIncludeDirectories);..\..;..\..\secp256k1;..\..\secp256k1\include;..\..\secp256k1\src;..\..\libsodium-1.0.12\src\libsodium\include;..\..\libsodium-1.0.12\src\libsodium\include\sodium;..\..\micro-ecc;..\..\moxie;..\..\ctaes;..\..\platform_sgx..\..\ripemd160;..\..\sha3</AdditionalIncludeDirectories>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PreprocessorDefinitions>_WINDLL;%(PreprocessorDefinitions);USE_LOW_HEAP=1;uECC_SUPPORTS_secp160r1=0;uECC_SUPPORTS_secp192r1=0;-ECC_SUPPORTS_secp224r1=0;uECC_SUPPORTS_secp256k1=0;uECC_ASM=uECC_asm_none;CONFIGURED;USE_KECCAK;FULL_SHA3_FAMILY_SUPPORT;BOLOS_MAJOR_VERSION=1;BOLOS_MINOR_VERSION=0;BOLOS_PATCH_VERSION=0;BOLOS_SHARED_MEMORY_SIZE=2048;SODIUM_STATIC;SGX</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sgx_trts.lib;sgx_tstdc.lib;sgx_tservice.lib;sgx_tcrypto.lib;sgx_tkey_exchange.lib;sgx_tstdcxx.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <EntryPointSymbol />
+      <NoEntryPoint>true</NoEntryPoint>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>$(SGXSDKInstallPath)include;$(SGXSDKInstallPath)include\tlibc;$(SGXSDKInstallPath)include\stlport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sgx_trts.lib;sgx_tstdc.lib;sgx_tservice.lib;sgx_tcrypto_opt.lib;sgx_tstdcxx.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)bin\$(Platform)\Release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <NoEntryPoint>true</NoEntryPoint>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(SGXSDKInstallPath)bin\win32\release\sgx_sign.exe" sign -key "$(ProjectDir)BolosSGX_private.pem" -enclave "$(OutDir)BolosSGX.dll" -out "$(OutDir)BolosSGX.signed.dll" -config "$(ProjectDir)..\..\Enclave\BolosSGX.config.xml"</Command>
+      <Message>sign the enclave</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\bolos_portable.c" />
+    <ClCompile Include="..\..\bolos_printf.c" />
+    <ClCompile Include="..\..\ctaes\ctaes.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_aead\chacha20poly1305\sodium\aead_chacha20poly1305.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\crypto_auth.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha256\auth_hmacsha256.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha512256\auth_hmacsha512256.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha512\auth_hmacsha512.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box_easy.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box_seal.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\curve25519xsalsa20poly1305\box_curve25519xsalsa20poly1305.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\curve25519\ref10\curve25519_ref10.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\hsalsa20\core_hsalsa20.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\hsalsa20\ref2\core_hsalsa20_ref2.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\salsa\ref\core_salsa_ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\generichash_blake2.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\blake2b-ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\generichash_blake2b.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\crypto_generichash.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\crypto_hash.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha256\cp\hash_sha256_cp.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha256\hash_sha256.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha512\cp\hash_sha512_cp.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha512\hash_sha512.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\crypto_onetimeauth.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\poly1305\donna\poly1305_donna.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\poly1305\onetimeauth_poly1305.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-core.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-encoding.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\blake2b-long.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\pwhash_argon2i.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\crypto_pwhash.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\crypto_scrypt-common.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\nosse\pwhash_scryptsalsa208sha256_nosse.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\pbkdf2-sha256.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\pwhash_scryptsalsa208sha256.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\scrypt_platform.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\crypto_scalarmult.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\curve25519\ref10\x25519_ref10.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\curve25519\scalarmult_curve25519.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\crypto_secretbox.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\crypto_secretbox_easy.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\xsalsa20poly1305\secretbox_xsalsa20poly1305.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\crypto_shorthash.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphash24_ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\siphash24\shorthash_siphash24.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\crypto_sign.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\keypair.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\open.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\sign.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\sign_ed25519.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\chacha20\stream_chacha20.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\crypto_stream.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\salsa20\stream_salsa20.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\xsalsa20\stream_xsalsa20.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_verify\sodium\verify.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\randombytes\randombytes.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\core.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\runtime.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\utils.c" />
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\version.c" />
+    <ClCompile Include="..\..\moxie\machine.c" />
+    <ClCompile Include="..\..\moxie\moxie.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_continuation.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_core.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_endorsement.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_shared_memory.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_utils.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_wrapping.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_common.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_dispatcher.c" />
+    <ClCompile Include="..\..\moxie\moxie_swi_sodium.c" />
+    <ClCompile Include="..\..\platform_sgx\bolos_platform.c" />
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_antireplay.c" />
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_crypto.c" />
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_time.c" />
+    <ClCompile Include="..\..\platform_sgx\platform_al.c" />
+    <ClCompile Include="..\..\platform_sgx\platform_errno.c" />
+    <ClCompile Include="..\..\platform_sgx\platform_persistent_context.c" />
+    <ClCompile Include="..\..\platform_sgx\sgx_pse.c" />
+    <ClCompile Include="..\..\ripemd160\ripemd160.c" />
+    <ClCompile Include="..\..\sha3\sha3.c" />
+    <ClCompile Include="..\..\micro-ecc\uECC.c" />
+    <ClCompile Include="BolosSGX_t.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\bolos.h" />
+    <ClInclude Include="..\..\bolos_printf.h" />
+    <ClInclude Include="..\..\platform_al.h" />
+    <ClInclude Include="..\..\platform_persistent_context.h" />
+    <ClInclude Include="..\..\portable_cx.h" />
+    <ClInclude Include="..\..\portable_msg.h" />
+    <ClInclude Include="..\..\portable_persistent_context.h" />
+    <ClInclude Include="..\..\portable_transient_context.h" />
+    <ClInclude Include="BolosSGX_t.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\Enclave\BolosSGX.edl">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">"$(SGXSDKInstallPath)bin\win32\release\sgx_edger8r.exe" --trusted "$(ProjectDir)..\..\Enclave\BolosSGX.edl" --search-path "$(SGXSDKInstallPath)include"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">Creating proxy/bridge routines</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">$(ProjectName)_t.h;$(ProjectName)_t.c;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Simulation|Win32'">..\..\Enclave\BolosSGX.config.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">"$(SGXSDKInstallPath)bin\win32\release\sgx_edger8r.exe" --trusted "$(ProjectDir)..\..\Enclave\BolosSGX.edl" --search-path "$(SGXSDKInstallPath)include"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">Creating proxy/bridge routines</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">$(ProjectName)_t.h;$(ProjectName)_t.c;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Prerelease|Win32'">..\..\Enclave\BolosSGX.config.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(SGXSDKInstallPath)bin\win32\release\sgx_edger8r.exe" --trusted "$(ProjectDir)..\..\Enclave\BolosSGX.edl" --search-path "$(SGXSDKInstallPath)include"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating proxy/bridge routines</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_t.h;$(ProjectName)_t.c;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\Enclave\BolosSGX.config.xml;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(SGXSDKInstallPath)bin\win32\release\sgx_edger8r.exe" --trusted "$(ProjectDir)..\..\Enclave\BolosSGX.edl" --search-path "$(SGXSDKInstallPath)include"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating proxy/bridge routines</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)_t.h;$(ProjectName)_t.c;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\Enclave\BolosSGX.config.xml;%(AdditionalInputs)</AdditionalInputs>
+    </CustomBuild>
+    <None Include="BolosSGX_private.pem" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Enclave\BolosSGX.config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

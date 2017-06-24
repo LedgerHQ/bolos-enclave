@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{eba65f3c-7bc4-428b-aedf-7094406eea2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{80bd0590-55f1-4b9b-902f-7ee1ab46fb1d}</UniqueIdentifier>
+      <Extensions>cpp;c;edl;def; .. and other options</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6752e113-c8cb-4c60-9574-dff8017ed8b0}</UniqueIdentifier>
+      <Extensions>h;hpp; .. and other options</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{92c0b337-e419-4727-acb9-c7e26de9a80f}</UniqueIdentifier>
+      <Extensions>rc;xml;pem; .. and other options</Extensions>
+    </Filter>
+    <Filter Include="Source Files\sodium">
+      <UniqueIdentifier>{0be246c7-662b-4471-8515-13f154ebc85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\uECC">
+      <UniqueIdentifier>{3f3f2404-5974-46b4-9bc4-d5a470a3b937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\moxie">
+      <UniqueIdentifier>{ce20d293-52ad-4332-96b0-6fb9f70ac3b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sgx">
+      <UniqueIdentifier>{8242720b-c49b-4d05-a55b-1e25f7cf26df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\portable">
+      <UniqueIdentifier>{1751bfc4-acbf-4968-acd1-bf0cbfa85aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ctaes">
+      <UniqueIdentifier>{94f2b951-714e-4034-ab06-5faf35bd832f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sha3">
+      <UniqueIdentifier>{f7d0508b-fee5-4576-a8ff-ead5a032a51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ripemd160">
+      <UniqueIdentifier>{67c7d93b-18ed-4cb1-918b-db545447a35b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BolosSGX_t.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\machine.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_continuation.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_core.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_shared_memory.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_utils.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_wrapping.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_common.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_dispatcher.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_sodium.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bolos_portable.c">
+      <Filter>Source Files\portable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bolos_printf.c">
+      <Filter>Source Files\portable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\bolos_platform.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_antireplay.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_crypto.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\moxie_swi_bolos_time.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\platform_al.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\platform_errno.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\platform_persistent_context.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform_sgx\sgx_pse.c">
+      <Filter>Source Files\sgx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\micro-ecc\uECC.c">
+      <Filter>Source Files\uECC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ctaes\ctaes.c">
+      <Filter>Source Files\ctaes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sha3\sha3.c">
+      <Filter>Source Files\sha3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ripemd160\ripemd160.c">
+      <Filter>Source Files\ripemd160</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_aead\chacha20poly1305\sodium\aead_chacha20poly1305.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\crypto_auth.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha256\auth_hmacsha256.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha512\auth_hmacsha512.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_auth\hmacsha512256\auth_hmacsha512256.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box_easy.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\crypto_box_seal.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_box\curve25519xsalsa20poly1305\box_curve25519xsalsa20poly1305.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\curve25519\ref10\curve25519_ref10.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\hsalsa20\core_hsalsa20.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\hsalsa20\ref2\core_hsalsa20_ref2.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_core\salsa\ref\core_salsa_ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\crypto_generichash.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\generichash_blake2.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\generichash_blake2b.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\crypto_hash.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha256\hash_sha256.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha256\cp\hash_sha256_cp.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha512\hash_sha512.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_hash\sha512\cp\hash_sha512_cp.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\crypto_onetimeauth.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\poly1305\onetimeauth_poly1305.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_onetimeauth\poly1305\donna\poly1305_donna.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\crypto_pwhash.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\crypto_scrypt-common.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\pbkdf2-sha256.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\pwhash_scryptsalsa208sha256.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\scrypt_platform.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\scryptsalsa208sha256\nosse\pwhash_scryptsalsa208sha256_nosse.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-core.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-encoding.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\blake2b-long.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\crypto_scalarmult.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\curve25519\scalarmult_curve25519.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\crypto_secretbox.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\crypto_secretbox_easy.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_secretbox\xsalsa20poly1305\secretbox_xsalsa20poly1305.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\crypto_shorthash.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\siphash24\shorthash_siphash24.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphash24_ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\crypto_sign.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\sign_ed25519.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\keypair.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\open.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_sign\ed25519\ref10\sign.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\crypto_stream.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\chacha20\stream_chacha20.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\salsa20\stream_salsa20.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\xsalsa20\stream_xsalsa20.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_verify\sodium\verify.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\randombytes\randombytes.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\core.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\runtime.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\utils.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\sodium\version.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_scalarmult\curve25519\ref10\x25519_ref10.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\moxie\moxie_swi_bolos_endorsement.c">
+      <Filter>Source Files\moxie</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_generichash\blake2b\ref\blake2b-ref.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libsodium-1.0.12\src\libsodium\crypto_pwhash\argon2\pwhash_argon2i.c">
+      <Filter>Source Files\sodium</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BolosSGX_t.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bolos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bolos_printf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\platform_al.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\platform_persistent_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\portable_cx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\portable_msg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\portable_persistent_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\portable_transient_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BolosSGX_private.pem">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Enclave\BolosSGX.config.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\Enclave\BolosSGX.edl">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

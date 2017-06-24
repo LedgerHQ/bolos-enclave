@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BolosSGX", "BolosSGX\BolosSGX.vcxproj", "{A888DBA5-5386-4CCD-AB55-159FB62EACA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Prerelease|ARM = Prerelease|ARM
+		Prerelease|Win32 = Prerelease|Win32
+		Prerelease|x64 = Prerelease|x64
+		Release|ARM = Release|ARM
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		Simulation|ARM = Simulation|ARM
+		Simulation|Win32 = Simulation|Win32
+		Simulation|x64 = Simulation|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Debug|ARM.ActiveCfg = Debug|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Debug|Win32.Build.0 = Debug|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Debug|x64.ActiveCfg = Debug|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Prerelease|ARM.ActiveCfg = Prerelease|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Prerelease|Win32.ActiveCfg = Prerelease|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Prerelease|Win32.Build.0 = Prerelease|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Prerelease|x64.ActiveCfg = Prerelease|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Release|ARM.ActiveCfg = Release|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Release|Win32.ActiveCfg = Release|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Release|Win32.Build.0 = Release|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Release|x64.ActiveCfg = Release|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Simulation|ARM.ActiveCfg = Simulation|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Simulation|Win32.ActiveCfg = Simulation|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Simulation|Win32.Build.0 = Simulation|Win32
+		{A888DBA5-5386-4CCD-AB55-159FB62EACA9}.Simulation|x64.ActiveCfg = Simulation|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

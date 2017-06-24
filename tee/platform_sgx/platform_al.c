@@ -31,11 +31,17 @@ sgx_sha_state_handle_t shaHandle = NULL;
 
 static uint8_t IDENTITY_BLOB[] = "PLATFORM_ID";
 
+void platform_assert(int expression) {
+    if (!expression) {
+        abort();
+    }
+}
+
 bool platform_random(uint8_t *buffer, uint32_t length) {
     sgx_status_t status;
 
     status = sgx_read_rand(buffer, length);
-    assert(status == SGX_SUCCESS);
+    platform_assert(status == SGX_SUCCESS);
     return true;
 }
 
