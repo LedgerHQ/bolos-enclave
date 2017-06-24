@@ -38,8 +38,7 @@ setup(
     classifiers=[
 	'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX :: Linux',
-        'Operating System :: Microsoft :: Windows',
-	'Operating System :: MacOS :: MacOS X'
+        'Operating System :: Microsoft :: Windows'
     ]
 )
 
